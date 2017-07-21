@@ -1,0 +1,61 @@
+
+<md-sidenav-container class="demo-root" fullscreen>
+  <md-sidenav #start>
+    <md-nav-list>
+      <a md-list-item
+         (click)="start.close()"
+         [routerLink]="['./detail']">
+        axxx
+      </a>
+
+      <hr>
+
+      <a md-list-item
+         (click)="start.close()"
+         [routerLink]="['baseline']">
+        Baseline
+      </a>
+    </md-nav-list>
+    <button md-button (click)="start.close()">CLOSE</button>
+  </md-sidenav>
+  <div>
+    <md-toolbar color="primary">
+      <button md-icon-button (click)="start.open()">
+        <md-icon class="md-24">menu</md-icon>
+      </button>
+      
+        <a [routerLink]="['./']">
+
+          <h1>Man With Van</h1>
+          <img src="assets/img/mwv.png" width="100px"/>
+        </a>
+        
+        <div>
+          <button md-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
+            <md-icon class="md-24">fullscreen</md-icon>
+          </button>
+          <button md-button (click)="dark = !dark">{{dark ? 'Light' : 'Dark'}} theme</button>
+        </div>
+
+    </md-toolbar>
+  </div>
+
+
+<header style="text-align: center" class="docs-header-background">
+  <div _ngcontent-c9="" class="docs-header-section">
+    <div _ngcontent-c9="" class="docs-header-headline">
+      <h1 _ngcontent-c9="" class="mat-h1">Angular Material</h1>
+      <h2 _ngcontent-c9=""> Material Design components for Angular</h2>
+    </div>
+    <div _ngcontent-c9="" class="docs-header-start">
+     <a _ngcontent-c9="" class="docs-button mat-raised-button" md-raised-button="" routerlink="about" aria-disabled="false" tabindex="0" href="/guide/getting-started"><span class="mat-button-wrapper">Get started</span><div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div></a>
+    </div>
+  </div>
+</header>
+  
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+</md-sidenav-container>

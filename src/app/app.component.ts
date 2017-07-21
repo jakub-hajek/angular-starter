@@ -1,12 +1,8 @@
-/**
- * Angular 2 decorators and services
- */
-import {
-  Component,
-  OnInit,
-  ViewEncapsulation
-} from '@angular/core';
-import { AppState } from './app.service';
+import {Component, HostBinding, AfterViewInit, ChangeDetectionStrategy,
+  ViewEncapsulation, ChangeDetectorRef, OnInit} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MdIconRegistry } from '@angular/material';
+import { TdMediaService } from '@covalent/core';
 
 /**
  * App Component
@@ -14,61 +10,38 @@ import { AppState } from './app.service';
  */
 @Component({
   selector: 'app',
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: [
-    './app.component.css'
-  ],
-  template: `
-    <nav>
-      <a [routerLink]=" ['./'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Index
-      </a>
-      <a [routerLink]=" ['./home'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Home
-      </a>
-      <a [routerLink]=" ['./detail'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Detail
-      </a>
-      <a [routerLink]=" ['./barrel'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Barrel
-      </a>
-      <a [routerLink]=" ['./about'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        About
-      </a>
-    </nav>
-
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-
-    <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
-
-    <footer>
-      <span>WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a></span>
-      <div>
-        <a [href]="url">
-          <img [src]="angularclassLogo" width="25%">
-        </a>
-      </div>
-    </footer>
-  `
+  styleUrls: ['./app.component.scss'],
+  templateUrl: 'app.component.html',
+  encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements OnInit {
-  public angularclassLogo = 'assets/img/angularclass-avatar.png';
-  public name = 'Angular 2 Webpack Starter';
-  public url = 'https://twitter.com/AngularClass';
+export class AppComponent implements OnInit, AfterViewInit {
 
-  constructor(
-    public appState: AppState
-  ) {}
+  routes: Object[] = [
+    {
+      title: 'Home',
+      route: '/home',
+      icon: 'home',
+    }, {
+      title: 'About',
+      route: '/about',
+      icon: 'laptop_mac',
+    },
+  ];
+  
+  constructor(private _iconRegistry: MdIconRegistry,
+              private _domSanitizer: DomSanitizer,
+              private _changeDetectorRef: ChangeDetectorRef,
+              public media: TdMediaService) {
 
+  }
+  
+  ngAfterViewInit(): void {
+    this.media.broadcast();
+    this._changeDetectorRef.detectChanges();
+  }
+ 
   public ngOnInit() {
-    console.log('Initial App State', this.appState.state);
+   
   }
 
 }

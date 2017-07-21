@@ -28,6 +28,15 @@ import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MaterialModule} from './material.module.ts'
+import { DomSanitizer } from '@angular/platform-browser';
+import { MdIconRegistry } from '@angular/material';
+
+import {CovalentMenuModule} from '@covalent/core';
+import {CovalentNotificationsModule} from '@covalent/core';
+import {CovalentLayoutModule} from '@covalent/core';
+import {CovalentMediaModule} from '@covalent/core';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -63,6 +72,12 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    BrowserAnimationsModule,
+    MaterialModule, 
+    CovalentLayoutModule,
+    CovalentMediaModule,
+    CovalentMenuModule,
+    CovalentNotificationsModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
   /**
@@ -77,8 +92,22 @@ export class AppModule {
 
   constructor(
     public appRef: ApplicationRef,
-    public appState: AppState
-  ) {}
+    public appState: AppState,
+    private _iconRegistry: MdIconRegistry,
+    private _domSanitizer: DomSanitizer,
+    
+  ) {
+    this._iconRegistry.addSvgIconInNamespace('assets', 'teradata-ux',
+    this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/Teradata/covalent-quickstart/develop/src/assets/icons/teradata-ux.svg'));
+    this._iconRegistry.addSvgIconInNamespace('assets', 'mwvlogo',
+    //this._domSanitizer.bypassSecurityTrustResourceUrl('assets/img/mwv.svg'));
+    this._domSanitizer.bypassSecurityTrustResourceUrl('https://image.flaticon.com/icons/svg/33/33702.svg'));
+    this._iconRegistry.addSvgIconInNamespace('assets', 'covalent-mark',
+    this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/Teradata/covalent-quickstart/develop/src/assets/icons/covalent-mark.svg'));
+
+    this._iconRegistry.registerFontClassAlias('fontawesome', 'fa');
+
+  }
 
   public hmrOnInit(store: StoreType) {
     if (!store || !store.state) {

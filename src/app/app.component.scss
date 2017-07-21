@@ -1,0 +1,17 @@
+@import '~styles/variables';
+.mat-toolbar-layout .mat-icon.md-icon-logo {
+    width: 70px;
+    padding-top:10px;
+    g {
+        fill: $accent-text-color;
+    }
+}
+
+.pokus .mat-toolbar-layout .mat-icon.md-icon-logo {
+    width: 100px;
+    padding-top:0px;
+    g {
+        fill: rgba(0, 0, 0, 0.87);
+    }
+}
+

@@ -64,7 +64,7 @@ dll/
 .idea/
 *.swp
 
-
+/xhr2/
 # Angular #
 *.ngfactory.ts
 *.css.shim.ts
